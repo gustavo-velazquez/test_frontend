@@ -1,0 +1,12 @@
+img{
+    width: 100%;
+    height: auto;
+}
+
+.btn{
+    text-align: center;
+    margin:auto;
+    display:block;
+    width: 20%;
+    margin-bottom: 30px;
+}
