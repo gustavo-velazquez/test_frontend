@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post.model';
 import { PostService } from 'src/app/servervices/post.service';
@@ -11,6 +11,7 @@ import { PostService } from 'src/app/servervices/post.service';
 export class PostComponent implements OnInit {
   id: number;
   post!: Post;
+  dateComment: string ='';
 
   constructor(private activeRoute: ActivatedRoute, private postService: PostService) {
 
@@ -26,5 +27,11 @@ export class PostComponent implements OnInit {
     .subscribe((response : Post) => {this.post = response} )
 
   }
+
+  getDate(date: string){
+    this.dateComment = date;
+  }
+
+
 
 }

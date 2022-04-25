@@ -1,9 +1,12 @@
 <article class="card border-primary mb-3 text-left">
     <h3> Detalle del post: {{post.id}}</h3>
     <div>
+        <span>Last comment: {{dateComment | date:'YYYY, MMM, dd '}}</span>
+    </div>
+    <div>
         <h1>{{post.title}}</h1>
         <p>{{post.body}}</p>
     </div>
 </article>
     
-    <app-comments [postId]="post.id"></app-comments>
+    <app-comments [postId]="post.id" (dateComments) = "getDate($event)"></app-comments>
