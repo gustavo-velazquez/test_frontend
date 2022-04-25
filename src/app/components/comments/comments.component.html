@@ -1,1 +1,7 @@
-<p>comments works!</p>
+<article class="container">
+    <h1 class="alert alert-dark text-center">comentarios</h1>
+    <section *ngFor="let comment of comments" class="alert alert-secondary">
+        <label >nombre</label><p>{{comment.name}}</p>
+        <label >comentario</label><p>{{comment.body}}</p>
+    </section>
+</article>
