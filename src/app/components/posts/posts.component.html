@@ -14,13 +14,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor='let post of listPost | slice:starIndex:endIndex'>
+                        <td>{{post.id}}</td>
+                        <td>{{post.title}}</td>
+                        <td><a [routerLink]="['/post/,post.id']">ver</a></td>
                     </tr>
                 </tbody>
             </table>
+            <mat-paginator [length]="listPost.length"
+              [pageSize]="pageSize"
+              (page)="onPageChange($event)">
+            </mat-paginator>
         </div>
     </div>
 </div>
