@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PostComponent } from './components/post/post.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PostsComponent } from './components/posts/posts.component';
     AppComponent,
     Error404Component,
     PostComponent,
-    PostsComponent
+    PostsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
