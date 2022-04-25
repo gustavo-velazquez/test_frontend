@@ -17,7 +17,7 @@
                     <tr *ngFor='let post of listPost | slice:starIndex:endIndex'>
                         <td>{{post.id}}</td>
                         <td>{{post.title}}</td>
-                        <td><a [routerLink]="['/post/,post.id']">ver</a></td>
+                        <td><a routerLink='post/{{post.id}}'>ver</a></td>
                     </tr>
                 </tbody>
             </table>

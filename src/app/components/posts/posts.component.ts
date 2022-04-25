@@ -14,14 +14,14 @@ export class PostsComponent implements OnInit {
   public starIndex:number = 0;
   public endIndex:number = 5;
 
-  constructor(private post:PostService) { }
+  constructor(private postService:PostService) { }
 
   ngOnInit(): void {
     this.getData();
   }
 
   public getData(){
-    this.post.get().subscribe((response : Post[])=> {
+    this.postService.getPosts().subscribe((response : Post[])=> {
       this.listPost = response;
     })
   }
