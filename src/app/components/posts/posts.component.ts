@@ -20,13 +20,13 @@ export class PostsComponent implements OnInit {
     this.getData();
   }
 
-  public getData(){
+  public getData():void{
     this.postService.getPosts().subscribe((response : Post[])=> {
       this.listPost = response;
     })
   }
 
-  public onPageChange(event: PageEvent){
+  public onPageChange(event: PageEvent):void{
     this.starIndex = event.pageIndex * event.pageSize;
     this.endIndex = this.starIndex + event.pageSize;
    

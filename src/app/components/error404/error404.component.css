@@ -1,5 +1,6 @@
+
 img{
-    width: 100%;
+    width: 90%;
     height: auto;
 }
 
@@ -8,5 +9,4 @@ img{
     margin:auto;
     display:block;
     width: 20%;
-    margin-bottom: 30px;
 }

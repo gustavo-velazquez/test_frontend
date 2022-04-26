@@ -13,7 +13,7 @@ export class CommentsComponent implements OnInit {
   @Input() postId !: number;
   @Output() dateComments = new EventEmitter(); 
 
-date !: Date;
+  date!: Date;
 
   comments : Comment[] = [];
   lastComment!: Comment ;
@@ -41,13 +41,20 @@ date !: Date;
   getCommentLocalStorage(){
     const newComments : Comment[] =(this.postService.getCommentLocalStorage());
     newComments.forEach(newComment => {
-      this.comments.push(newComment);      
+      if(newComment.postId !== this.postId){
+        this.comments.push(newComment);  
+      }   
     });
   }
 
   setCommentDate():void{
-    this.date = new Date();
-    this.dateComments.emit(this.date);
+    if((this.comments[this.comments.length-1]).date === undefined){
+      this.dateComments.emit(this.date);
+    }
+    else{
+      this.dateComments.emit((this.comments[this.comments.length-1]).date)
+    }
+    
   }
 
 }

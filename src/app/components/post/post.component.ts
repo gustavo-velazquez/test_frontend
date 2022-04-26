@@ -10,26 +10,29 @@ import { PostService } from 'src/app/servervices/post.service';
 })
 export class PostComponent implements OnInit {
 
+  id : number;
   post!: Post;
   dateComment: string ='';
+  load!: boolean;
+  show! : boolean;
 
   constructor(private activeRoute: ActivatedRoute, private postService: PostService) {
-   }
+    this.id = +this.activeRoute.snapshot.params['id']; 
+  }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(params => {
-      this.getPost(params['id'])
-    })
+    this.getPost(this.id);
   }
 
   getPost(id: number){
     this.postService.getPost(id)
-    .subscribe((response : Post) => {this.post = response} )
-
+    .subscribe((response : Post) => {this.post = response,this.load=true;} )
+    
   }
 
   getDate(date: string){
     this.dateComment = date;
-  }
+    (date!='')? this.show=true : this.show=false;
+  } 
 
 }

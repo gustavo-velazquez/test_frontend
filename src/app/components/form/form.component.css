@@ -1,0 +1,9 @@
+form{
+    width: 60%;
+    height: auto;
+    margin: auto;
+}
+
+form .btn{
+    margin: 5px;;
+}

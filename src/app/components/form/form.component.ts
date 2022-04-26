@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from 'src/app/models/comment.model';
 import { PostService } from 'src/app/servervices/post.service';
@@ -11,8 +11,8 @@ import { PostService } from 'src/app/servervices/post.service';
 export class FormComponent implements OnInit {
 
   contactForm !: FormGroup;
-  postId!: number;
   date!: Date ;
+  @Input() postId!: number;
 
   constructor(private formBuilder:FormBuilder, private postService:PostService) { }
 
@@ -24,12 +24,13 @@ export class FormComponent implements OnInit {
       this.date = new Date();      
       this.postService.addComment({
       postId: this.postId,
-      id: this.postService.comments.length +1,
+      id: this.postService.comments[this.postService.comments.length - 1].id + 1,
       name: this.contactForm.controls['name'].value,
       email: this.contactForm.controls['email'].value,
       body: this.contactForm.controls['comment'].value,
       date: this.date
     })
+    
     this.contactForm.reset();
     
   }
