@@ -14,7 +14,7 @@ export class PostComponent implements OnInit {
   post!: Post;
   dateComment: string ='';
   load!: boolean;
-  show! : boolean;
+  showDate! : boolean;
 
   constructor(private activeRoute: ActivatedRoute, private postService: PostService) {
     this.id = +this.activeRoute.snapshot.params['id']; 
@@ -27,12 +27,11 @@ export class PostComponent implements OnInit {
   getPost(id: number){
     this.postService.getPost(id)
     .subscribe((response : Post) => {this.post = response,this.load=true;} )
-    
   }
 
   getDate(date: string){
     this.dateComment = date;
-    (date!='')? this.show=true : this.show=false;
+    (date!='')? this.showDate=true : this.showDate=false;
   } 
 
 }

@@ -1,7 +1,7 @@
 <div *ngIf="load" class="container text-left">
 <article  class="card mb-3">
     <h1> Detalle del post: {{post.id}}</h1>
-    <div *ngIf="show" >
+    <div *ngIf="showDate" >
         <span>Last comment: {{dateComment | date:'YYYY, MMM, dd '}}</span>
     </div>
     <div>
@@ -10,6 +10,6 @@
     </div>
 </article>
     
-<app-comments [postId]="post.id" (dateComments) = "getDate($event)"></app-comments>
+<app-comments (dateComments) = "getDate($event)" [postId]="post.id"></app-comments>
 <app-form [postId]="post.id"></app-form>
 </div>

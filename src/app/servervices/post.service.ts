@@ -9,7 +9,7 @@ import { Comment } from '../models/comment.model';
 })
 export class PostService {
 
-  comments : Comment[]= [];
+  comments !: Comment[];
 
   constructor(private http: HttpClient) { }
 

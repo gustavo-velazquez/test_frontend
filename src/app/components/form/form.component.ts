@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Comment } from 'src/app/models/comment.model';
+import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/servervices/post.service';
 
 @Component({
@@ -10,20 +10,24 @@ import { PostService } from 'src/app/servervices/post.service';
 })
 export class FormComponent implements OnInit {
 
+  id : number;
   contactForm !: FormGroup;
   date!: Date ;
   @Input() postId!: number;
 
-  constructor(private formBuilder:FormBuilder, private postService:PostService) { }
+  constructor(private formBuilder:FormBuilder, private postService:PostService, private activeRoute: ActivatedRoute) { 
+    this.id = +this.activeRoute.snapshot.params['id']; 
+  }
 
   ngOnInit(): void {
     this.contactForm = this.initForm();
   }
 
   onSubmit(){
+
       this.date = new Date();      
       this.postService.addComment({
-      postId: this.postId,
+      postId: this.id,
       id: this.postService.comments[this.postService.comments.length - 1].id + 1,
       name: this.contactForm.controls['name'].value,
       email: this.contactForm.controls['email'].value,

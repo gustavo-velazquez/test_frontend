@@ -2,13 +2,15 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { Comment } from 'src/app/models/comment.model';
 import { PostService } from 'src/app/servervices/post.service';
 import { EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
+
+  id: number;
 
   @Input() postId !: number;
   @Output() dateComments = new EventEmitter(); 
@@ -18,8 +20,8 @@ export class CommentsComponent implements OnInit {
   comments : Comment[] = [];
   lastComment!: Comment ;
 
-  constructor(private postService: PostService) {
-    
+  constructor(private postService: PostService,private activeRoute: ActivatedRoute) {
+    this.id = +this.activeRoute.snapshot.params['id']; 
    }
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class CommentsComponent implements OnInit {
   }
 
   getcomments(){
-    this.postService.getComment(this.postId)
+    this.postService.getComment(this.id)
     .subscribe((response: Comment[]) => {
     this.comments = response;
     this.getCommentLocalStorage(); });
@@ -41,7 +43,7 @@ export class CommentsComponent implements OnInit {
   getCommentLocalStorage(){
     const newComments : Comment[] =(this.postService.getCommentLocalStorage());
     newComments.forEach(newComment => {
-      if(newComment.postId !== this.postId){
+      if(newComment.postId === this.id){
         this.comments.push(newComment);  
       }   
     });
@@ -49,7 +51,7 @@ export class CommentsComponent implements OnInit {
 
   setCommentDate():void{
     if((this.comments[this.comments.length-1]).date === undefined){
-      this.dateComments.emit(this.date);
+      this.dateComments.emit(new Date);
     }
     else{
       this.dateComments.emit((this.comments[this.comments.length-1]).date)
