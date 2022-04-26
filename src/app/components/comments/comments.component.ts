@@ -17,7 +17,7 @@ export class CommentsComponent implements OnInit {
 
   date!: Date;
 
-  comments : Comment[] = [];
+  comments !: Comment[];
   lastComment!: Comment ;
 
   constructor(private postService: PostService,private activeRoute: ActivatedRoute) {
@@ -38,6 +38,12 @@ export class CommentsComponent implements OnInit {
   saveComment(){
     this.lastComment = this.comments[this.comments.length];
     this.postService.addComment(this.lastComment);
+  }
+
+  deleteComment(id:number){
+    this.comments = this.comments.filter((comment: Comment) => comment.id !== id)
+    this.postService.comments = this.comments
+    this.postService.saveLocalStorage();
   }
 
   getCommentLocalStorage(){

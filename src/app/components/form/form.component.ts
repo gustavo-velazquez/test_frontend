@@ -32,7 +32,8 @@ export class FormComponent implements OnInit {
       name: this.contactForm.controls['name'].value,
       email: this.contactForm.controls['email'].value,
       body: this.contactForm.controls['comment'].value,
-      date: this.date
+      date: this.date,
+      storage: true
     })
     
     this.contactForm.reset();

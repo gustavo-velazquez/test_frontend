@@ -3,6 +3,11 @@
     <section *ngFor="let comment of comments" class="alert alert-secondary">
         <label >nombre</label><p>{{comment.name}}</p>
         <label >comentario</label><p>{{comment.body}}</p>
+         
+    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" *ngIf="comment.storage" (click)="deleteComment(comment.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
     </section>
     <div class="text-center">
     <button (click)="setCommentDate()" class="btn btn-block btn-primary">Emitir</button>
