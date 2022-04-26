@@ -24,11 +24,11 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(){
-  console.log(this.postService.comments)
+   
       this.date = new Date();      
       this.postService.addComment({
       postId: this.id,
-      id: this.postService.comments[this.postService.comments.length - 1].id + 1,
+      id:((!this.postService.comments.length)? 1 : this.postService.comments[this.postService.comments.length - 1].id + 1),
       name: this.contactForm.controls['name'].value,
       email: this.contactForm.controls['email'].value,
       body: this.contactForm.controls['comment'].value,
@@ -37,6 +37,7 @@ export class FormComponent implements OnInit {
     })
     
     this.contactForm.reset();
+    
   }
 
   initForm():FormGroup{
