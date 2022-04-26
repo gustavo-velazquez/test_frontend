@@ -24,7 +24,7 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(){
-
+  console.log(this.postService.comments)
       this.date = new Date();      
       this.postService.addComment({
       postId: this.id,
@@ -37,7 +37,6 @@ export class FormComponent implements OnInit {
     })
     
     this.contactForm.reset();
-    
   }
 
   initForm():FormGroup{

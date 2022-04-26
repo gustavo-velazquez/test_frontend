@@ -9,9 +9,11 @@ import { Comment } from '../models/comment.model';
 })
 export class PostService {
 
-  comments !: Comment[];
+  comments : Comment[]=[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getCommentLocalStorage;
+   }
 
   public getPosts(): Observable<Post[]>{
     const url:string = `https://jsonplaceholder.typicode.com/posts`;
@@ -28,20 +30,22 @@ export class PostService {
     return this.http.get<Comment[]>(url).pipe(map((data: Comment[]) => data));
   }
 
-  addComment(comment: Comment) {
+  addComment(comment: Comment) :void{
     this.comments.push(comment);
     console.log(comment);
     this.saveLocalStorage();
   }
 
-  public saveLocalStorage(){
+  public saveLocalStorage():void{
     localStorage.setItem('comments',JSON.stringify(this.comments));
   }
 
-  public getCommentLocalStorage(){
+  public getCommentLocalStorage():Comment[]{
     if (localStorage.getItem('comments')) {
       this.comments = JSON.parse(localStorage.getItem('comments')!)
     }
-    return this.comments  }
+   
+    return this.comments;
+  }
 
 }

@@ -46,13 +46,16 @@ export class CommentsComponent implements OnInit {
     this.postService.saveLocalStorage();
   }
 
-  getCommentLocalStorage(){
-    const newComments : Comment[] =(this.postService.getCommentLocalStorage());
-    newComments.forEach(newComment => {
-      if(newComment.postId === this.id){
-        this.comments.push(newComment);  
-      }   
-    });
+  getCommentLocalStorage(): void{
+    const newComments : Comment[] = this.postService.getCommentLocalStorage();
+    
+    if (newComments.length){
+      newComments.forEach(newComment => {
+        if(newComment.postId === this.id){
+          this.comments.push(newComment);  
+        }   
+      });
+    }
   }
 
   setCommentDate():void{
