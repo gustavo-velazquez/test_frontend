@@ -32,6 +32,4 @@ export class PostComponent implements OnInit {
     this.dateComment = date;
   }
 
-
-
 }
