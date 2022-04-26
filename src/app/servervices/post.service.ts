@@ -9,7 +9,7 @@ import { Comment } from '../models/comment.model';
 })
 export class PostService {
 
-  comment : Comment | undefined;
+  comments : Comment[]= [];
 
   constructor(private http: HttpClient) { }
 
@@ -29,16 +29,19 @@ export class PostService {
   }
 
   addComment(comment: Comment) {
-    this.comment = comment
+    this.comments.push(comment);
+    console.log(comment);
     this.saveLocalStorage();
   }
 
   public saveLocalStorage(){
-    localStorage.setItem('comment',JSON.stringify(this.comment));
+    localStorage.setItem('comments',JSON.stringify(this.comments));
   }
 
   public getCommentLocalStorage(){
-    return (localStorage.getItem('comment'))?  JSON.parse(localStorage.getItem('comment')!): this.comment ;
-  }
+    if (localStorage.getItem('comments')) {
+      this.comments = JSON.parse(localStorage.getItem('comments')!)
+    }
+    return this.comments  }
 
 }

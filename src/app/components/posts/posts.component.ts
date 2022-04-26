@@ -10,9 +10,9 @@ import { PostService } from 'src/app/servervices/post.service';
 })
 export class PostsComponent implements OnInit {
   public listPost: Post[] = [];
-  public pageSize:number = 5;
+  public pageSize:number = 10;
   public starIndex:number = 0;
-  public endIndex:number = 5;
+  public endIndex:number = 10;
 
   constructor(private postService:PostService) { }
 

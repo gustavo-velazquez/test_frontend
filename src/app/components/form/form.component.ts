@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Comment } from 'src/app/models/comment.model';
+import { PostService } from 'src/app/servervices/post.service';
 
 @Component({
   selector: 'app-form',
@@ -9,15 +11,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormComponent implements OnInit {
 
   contactForm !: FormGroup;
+  postId!: number;
+  date!: Date ;
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private formBuilder:FormBuilder, private postService:PostService) { }
 
   ngOnInit(): void {
     this.contactForm = this.initForm();
   }
 
-  onSubmit():void{
-    console.log("form");
+  onSubmit(){
+      this.date = new Date();      
+      this.postService.addComment({
+      postId: this.postId,
+      id: this.postService.comments.length +1,
+      name: this.contactForm.controls['name'].value,
+      email: this.contactForm.controls['email'].value,
+      body: this.contactForm.controls['comment'].value,
+      date: this.date
+    })
+    this.contactForm.reset();
+    
   }
 
   initForm():FormGroup{

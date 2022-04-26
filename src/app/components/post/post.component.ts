@@ -9,17 +9,17 @@ import { PostService } from 'src/app/servervices/post.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  id: number;
+
   post!: Post;
   dateComment: string ='';
 
   constructor(private activeRoute: ActivatedRoute, private postService: PostService) {
-
-    this.id = +this.activeRoute.snapshot.params['id'];
    }
 
   ngOnInit(): void {
-    this.getPost(this.id);
+    this.activeRoute.params.subscribe(params => {
+      this.getPost(params['id'])
+    })
   }
 
   getPost(id: number){

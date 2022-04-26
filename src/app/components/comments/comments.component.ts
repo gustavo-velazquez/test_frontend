@@ -18,7 +18,9 @@ date !: Date;
   comments : Comment[] = [];
   lastComment!: Comment ;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) {
+    
+   }
 
   ngOnInit(): void {
     this.getcomments();
@@ -26,7 +28,9 @@ date !: Date;
 
   getcomments(){
     this.postService.getComment(this.postId)
-    .subscribe((response: Comment[]) => this.comments = response )
+    .subscribe((response: Comment[]) => {
+    this.comments = response;
+    this.getCommentLocalStorage(); });
   }
 
   saveComment(){
@@ -35,12 +39,10 @@ date !: Date;
   }
 
   getCommentLocalStorage(){
-    if(this.postService.getCommentLocalStorage()){
-
-    }
-    else{
-      
-    }
+    const newComments : Comment[] =(this.postService.getCommentLocalStorage());
+    newComments.forEach(newComment => {
+      this.comments.push(newComment);      
+    });
   }
 
   setCommentDate():void{
